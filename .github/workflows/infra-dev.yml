@@ -3,8 +3,8 @@ on:
   push: 
     paths: 
       - infra/*
-      - .github/workflows/infra-prod.yml
-    branches: 
+      - .github/workflows/infra-dev.yml
+    branches-ignore:  
       - master
 
 permissions:

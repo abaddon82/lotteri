@@ -2,9 +2,9 @@ name: Run Azure Login with OpenID Connect and PowerShell
 on:
   push: 
     paths: 
-      - infra/*
-      - .github/workflows/infra-prod.yml
-    branches: 
+      - lotteriapp/*
+      - .github/workflows/lotteriapp-prod.yml
+    branches:  
       - master
 
 permissions:
