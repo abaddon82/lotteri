@@ -1,11 +1,11 @@
-name: Run Azure Login with OpenID Connect and PowerShell
+name: Build development infrastructure
 on:
   push: 
     paths: 
       - infra/*
       - .github/workflows/infra-dev.yml
     branches-ignore:  
-      - master
+      - main
 
 permissions:
       id-token: write

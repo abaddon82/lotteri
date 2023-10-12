@@ -1,11 +1,11 @@
-name: Run Azure Login with OpenID Connect and PowerShell
+name: Deploy development lotteriapp
 on:
   push: 
     paths: 
       - lotteriapp/*
       - .github/workflows/lotteriapp-dev.yml
     branches-ignore:  
-      - master
+      - main
 
 permissions:
       id-token: write
