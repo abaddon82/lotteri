@@ -12,8 +12,8 @@ permissions:
       contents: read
       
 jobs: 
-  Windows-latest:
-      runs-on: windows-latest
+  deploy-dev:
+      runs-on: linux-latest
       environment: dev
       steps:
         - name: Code checkout
