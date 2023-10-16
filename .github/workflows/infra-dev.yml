@@ -13,7 +13,7 @@ permissions:
       
 jobs: 
   deploy-dev:
-      runs-on: linux-latest
+      runs-on: ubuntu-latest
       environment: dev
       steps:
         - name: Code checkout
