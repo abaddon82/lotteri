@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lotteri-frontend-dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lotteri-frontend-dev
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        app: lotteri-frontend-dev
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: lotteri-frontend-dev
+        image: lotteri.azurecr.io/frontend-dev:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lotteri-frontend-dev
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    app: lotteri-frontend-dev

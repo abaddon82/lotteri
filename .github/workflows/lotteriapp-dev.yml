@@ -10,23 +10,38 @@ on:
 permissions:
       id-token: write
       contents: read
+      actions: read
       
 jobs: 
-  Windows-latest:
-      runs-on: windows-latest
+  deploy-lotteri-dev:
+      runs-on: ubuntu-latest
       environment: dev
       steps:
-        - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
+        - name: Code checkout
+          uses: actions/checkout@v4
+
+        - name: Azure login
           uses: azure/login@v1
           with:
             client-id: ${{ secrets.AZURE_CLIENT_ID }}
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
             enable-AzPSSession: true
+        
+        - name: ACR login
+          id: acr-login
+          run: |
+            az acr login -name lotteri
 
-        - name: 'Get resource group with PowerShell action'
-          uses: azure/powershell@v1
+        - name: Build and push frontend
+          id: build-image
+          run: |
+            az acr build --image lotteri.azurecr.io/frontend-dev:latest --registry lotteri --file "$GITHUB_WORKSPACE/lotteriapp/trekning-frontend/Dockerfile" .
+
+        - name: Update frontend deployment
+          uses: azure/k8s-deploy@v4
           with:
-             inlineScript: |
-               Get-AzResourceGroup
-             azPSVersion: "latest"
+            namespace: 'lotteri'
+            manifests: |
+              $GITHUB_WORKSPACE/lotteriapp/manifests/frontend.yml
+            images: 'lotteri.azurecr.io/frontend-dev:latest'
