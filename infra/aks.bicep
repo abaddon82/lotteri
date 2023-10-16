@@ -82,7 +82,7 @@ resource networkcontributorrole 'Microsoft.Authorization/roleDefinitions@2022-04
 }
 
 resource acrlotteri 'Microsoft.ContainerRegistry/registries@2019-05-01' = {
-  name: 'acr-lotteri'
+  name: 'lotteri'
   location: location
   sku: {
     name: 'Basic'
