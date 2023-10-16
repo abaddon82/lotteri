@@ -100,7 +100,7 @@ resource akscluster 'Microsoft.ContainerService/managedClusters@2023-04-01' = {
     kubernetesVersion: kubernetesVersion
     enableRBAC: enableRBAC
     dnsPrefix: 'aks-${clusterName}-${environment}'
-    nodeResourceGroup: resourceGroup().id
+    nodeResourceGroup: resourceGroup().name
     agentPoolProfiles: [
       {
         name: 'agentpool'
