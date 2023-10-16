@@ -31,7 +31,7 @@ jobs:
         - name: ACR login
           id: acr-login
           run: |
-            az acr login -name lotteri
+            az acr login --name lotteri
 
         - name: Build and push frontend
           id: build-image
