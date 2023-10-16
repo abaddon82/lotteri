@@ -120,7 +120,10 @@ resource akscluster 'Microsoft.ContainerService/managedClusters@2023-04-01' = {
         nodeTaints: []
         enableNodePublicIP: false
         tags: {}
-        vnetSubnetID: vnet_aks.properties.subnets[0].id
+
+        // Why?
+        vnetSubnetID: resourceId('Microsoft.Network/virtualNetworks/subnets', vnet_aks.name, vnet_aks.properties.subnets[0].name)
+        // vnetSubnetID: vnet_aks.properties.subnets[0].id
       }
     ]
     networkProfile: {
