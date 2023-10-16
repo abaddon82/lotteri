@@ -122,7 +122,7 @@ resource akscluster 'Microsoft.ContainerService/managedClusters@2023-04-01' = {
         tags: {}
 
         // Why?
-        vnetSubnetID: resourceId('Microsoft.Network/virtualNetworks/subnets', vnet_aks.name, vnet_aks.properties.subnets[0].name)
+        vnetSubnetID: resourceId('Microsoft.Network/virtualNetworks/subnets', 'vnet-${clusterName}-${environment}', 'snet-${clusterName}-${environment}')
         // vnetSubnetID: vnet_aks.properties.subnets[0].id
       }
     ]
