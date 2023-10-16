@@ -36,7 +36,7 @@ jobs:
         - name: Build and push frontend
           id: build-image
           run: |
-            az acr build --image lotteri.azurecr.io/frontend-dev:latest --registry lotteri --file "$GITHUB_WORKSPACE/lotteriapp/trekning-frontend/Dockerfile" .
+            az acr build --image lotteri.azurecr.io/frontend-dev:latest --registry lotteri --file "$GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app/Dockerfile" .
 
         - name: Update frontend deployment
           uses: azure/k8s-deploy@v4
