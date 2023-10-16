@@ -36,5 +36,4 @@ jobs:
               -g rg-tj-lotteri \
               --delete-resources \
               -p $GITHUB_WORKSPACE/infra/aks.bicepparam \
-              -p environment=dev \
               --deny-settings-mode None
