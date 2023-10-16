@@ -32,9 +32,9 @@ jobs:
           with:
             #azcliversion: 2.30.0
             inlineScript: |
-              az stack group create -n cluster-dev`
-              -g rg-tj-lotteri`
+              az stack group create -n cluster-dev \
+              -g rg-tj-lotteri \
               --delete-resources`
-              -f $GITHUB_WORKSPACE\infra\aks.bicep`
-              -p environment=dev`
+              -f $GITHUB_WORKSPACE\infra\aks.bicep \
+              -p environment=dev \
               --deny-settings-mode None
