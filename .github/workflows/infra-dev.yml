@@ -35,6 +35,6 @@ jobs:
               az stack group create -n cluster-dev \
               -g rg-tj-lotteri \
               --delete-resources \
-              -f $GITHUB_WORKSPACE/infra/aks.bicep \
+              -p $GITHUB_WORKSPACE/infra/aks.bicepparam \
               -p environment=dev \
               --deny-settings-mode None
