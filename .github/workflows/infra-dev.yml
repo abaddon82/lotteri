@@ -34,7 +34,7 @@ jobs:
             inlineScript: |
               az stack group create -n cluster-dev \
               -g rg-tj-lotteri \
-              --delete-resources`
+              --delete-resources \
               -f $GITHUB_WORKSPACE\infra\aks.bicep \
               -p environment=dev \
               --deny-settings-mode None
