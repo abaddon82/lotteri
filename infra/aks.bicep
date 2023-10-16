@@ -196,7 +196,7 @@ resource aksvnetroleassignment 'Microsoft.Authorization/roleAssignments@2022-04-
   name: guid(vnet_aks.id, akscluster.id, networkcontributorrole.id)
   properties: {
     principalId: akscluster.identity.principalId
-    roleDefinitionId: acrpullrole.id
+    roleDefinitionId: networkcontributorrole.id
     principalType: 'ServicePrincipal'
   }
 }
