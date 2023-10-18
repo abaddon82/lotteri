@@ -2,7 +2,7 @@ name: Deploy development lotteriapp
 on:
   push: 
     paths: 
-      - lotteriapp/*
+      - lotteriapp/**
       - .github/workflows/lotteriapp-dev.yml
     branches-ignore:  
       - main

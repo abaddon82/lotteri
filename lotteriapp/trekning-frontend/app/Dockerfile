@@ -1,9 +1,9 @@
 FROM node:20-alpine AS build
 
-WORKDIR $GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app
-#WORKDIR /build
+#WORKDIR $GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app
+WORKDIR /build
 
-COPY . .
+COPY $GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app .
 
 RUN npm install
 
