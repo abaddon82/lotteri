@@ -20,6 +20,14 @@ jobs:
         - name: Code checkout
           uses: actions/checkout@v4
 
+        - name: Generate build time
+          id: meta
+          uses: docker/metadata-action@v4
+          with:
+            images: lotteri.azurecr.io/frontend-dev
+            tags: |
+              type=raw,value={{date 'YYYYMMDD'}}
+
         - name: Azure login
           uses: azure/login@v1
           with:
@@ -36,7 +44,7 @@ jobs:
         - name: Build and push frontend
           id: build-image
           run: |
-            az acr build --image lotteri.azurecr.io/frontend-dev:latest --registry lotteri --file "$GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app/Dockerfile" .
+            az acr build --image lotteri.azurecr.io/frontend-dev:${{ steps.meta.outputs.tags }} --registry lotteri --file "$GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app/Dockerfile" .
 
         - name: Set AKS context
           uses: azure/aks-set-context@v3
@@ -57,4 +65,4 @@ jobs:
             namespace: 'dev'
             manifests: |
               lotteriapp/manifests/frontend.yml
-            images: 'lotteri.azurecr.io/frontend-dev:latest'
+            images: 'lotteri.azurecr.io/frontend-dev:${{ steps.meta.outputs.tags }}'
