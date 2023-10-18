@@ -185,7 +185,8 @@ resource aksacrroleassignment 'Microsoft.Authorization/roleAssignments@2022-04-0
   scope: acrlotteri
   name: guid(acrlotteri.id, akscluster.id, acrpullrole.id)
   properties: {
-    principalId: akscluster.properties.identityProfile.kubeletidentity.clientId
+    principalId: akscluster.properties.identityProfile.kubeletidentity.objectId
+    //principalId: akscluster.properties.identityProfile
     roleDefinitionId: acrpullrole.id
     principalType: 'ServicePrincipal'
   }
