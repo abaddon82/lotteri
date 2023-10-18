@@ -38,10 +38,16 @@ jobs:
           run: |
             az acr build --image lotteri.azurecr.io/frontend-dev:latest --registry lotteri --file "$GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app/Dockerfile" .
 
+        - name: Set AKS context
+          uses: azure/aks-set-context@v3
+          with:
+            resource-group: ${{ env.RESOURCE_GROUP }}
+            cluster-name: ${{ env.CLUSTER_NAME }}
+
         - name: Update frontend deployment
           uses: azure/k8s-deploy@v4
           with:
             namespace: 'lotteri'
             manifests: |
-              $GITHUB_WORKSPACE/lotteriapp/manifests/frontend.yml
+              "$GITHUB_WORKSPACE/lotteriapp/manifests/frontend.yml"
             images: 'lotteri.azurecr.io/frontend-dev:latest'
