@@ -26,7 +26,7 @@ jobs:
           with:
             images: lotteri.azurecr.io/frontend-dev
             tags: |
-              type=raw,value={{date 'YYYYMMDD'}}
+              type=raw,value={{date 'YYYYMMDD'}}{{github.run_number}}
 
         - name: Azure login
           uses: azure/login@v1
@@ -66,3 +66,10 @@ jobs:
             manifests: |
               lotteriapp/manifests/frontend.yml
             images: ${{ steps.meta.outputs.tags }}
+
+        - name: Deploy ingress
+          uses: azure/k8s-deploy@v4
+          with:
+            namespace: 'dev'
+            manifests: |
+              lotteriapp/manifests/ingress.yml
