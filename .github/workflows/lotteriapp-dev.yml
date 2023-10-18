@@ -54,7 +54,7 @@ jobs:
         - name: Update frontend deployment
           uses: azure/k8s-deploy@v4
           with:
-            namespace: 'lotteri'
+            namespace: 'dev'
             manifests: |
               lotteriapp/manifests/frontend.yml
             images: 'lotteri.azurecr.io/frontend-dev:latest'
