@@ -21,7 +21,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: lotteri-frontend-dev
-        #image: lotteri.azurecr.io/frontend-dev:latest
+        image: lotteri.azurecr.io/frontend-dev
         ports:
         - containerPort: 3000
         resources:
