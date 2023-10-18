@@ -44,7 +44,7 @@ jobs:
         - name: Build and push frontend
           id: build-image
           run: |
-            az acr build --image lotteri.azurecr.io/frontend-dev:${{ steps.meta.outputs.tags }} --registry lotteri --file "$GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app/Dockerfile" .
+            az acr build --image ${{ steps.meta.outputs.tags }} --registry lotteri --file "$GITHUB_WORKSPACE/lotteriapp/trekning-frontend/app/Dockerfile" .
 
         - name: Set AKS context
           uses: azure/aks-set-context@v3
@@ -65,4 +65,4 @@ jobs:
             namespace: 'dev'
             manifests: |
               lotteriapp/manifests/frontend.yml
-            images: 'lotteri.azurecr.io/frontend-dev:${{ steps.meta.outputs.tags }}'
+            images: ${{ steps.meta.outputs.tags }}
