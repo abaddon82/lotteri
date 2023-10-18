@@ -49,5 +49,5 @@ jobs:
           with:
             namespace: 'lotteri'
             manifests: |
-              $GITHUB_WORKSPACE/lotteriapp/manifests
+              $lotteriapp/manifests/frontend.yml
             images: 'lotteri.azurecr.io/frontend-dev:latest'
