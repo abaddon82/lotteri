@@ -33,7 +33,28 @@ jobs:
             #azcliversion: 2.30.0
             inlineScript: |
               az stack group create -n cluster-dev \
-              -g rg-tj-lotteri \
+              -g ${{ vars.RESOURCE_GROUP }} \
               --delete-resources \
               -p $GITHUB_WORKSPACE/infra/aks.bicepparam \
               --deny-settings-mode None
+
+        - name: Set AKS context
+          uses: azure/aks-set-context@v3
+          with:
+            resource-group: ${{ vars.RESOURCE_GROUP }}
+            cluster-name: ${{ vars.CLUSTER_NAME }}
+
+        - name: Create namespaces
+          uses: azure/k8s-deploy@v4
+          with:
+            namespace: 'default'
+            manifests: |
+              infra/manifests/namespaces.yml
+
+        - name: Install NGINX ingress controller
+          id: nginx-helm
+          run: |
+            helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+            helm repo update
+            helm install ingress-nginx ingress-nginx/ingress-nginx \
+            --namespace dev
